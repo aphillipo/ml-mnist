@@ -6,10 +6,14 @@ authors = [
     {name = "Andrew Phillipo",email = "andrewphillipo@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 dependencies = [
     "torch (>=2.6.0,<3.0.0)",
-    "torchvision (>=0.21.0,<0.22.0)"
+    "torchvision (>=0.21.0,<0.22.0)",
+    "streamlit (>=1.43.2,<2.0.0)",
+    "streamlit-drawable-canvas (>=0.9.3,<0.10.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "watchdog (>=6.0.0,<7.0.0)"
 ]
 
 [tool.poetry]
