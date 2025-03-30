@@ -1,0 +1,15 @@
+app = "mnist-ml-institute"   # Change this to your app's name
+primary_region = "lhr"  # If you change this, ensure it's to a region that offers GPUs
+vm.size = "shared-cpu-1x" # could be a GPU instance but these are not in LHR
+swap_size_mb = 32768    # This enables 32GB swap
+
+[build]
+  [build.args]
+    NONROOT_USER = "pythonuser" # Access this value in the Dockerfile using `ARG NONROOT_USER`
+
+# Use a volume to store LLMs or any big file that doesn't fit in a Docker image
+# This whole volume will be the non-root user's home directory
+[mounts]
+source = "data"
+destination = "/home/pythonuser" # Make sure this matches the value of the NONROOT_USER build arg
+# initial_size = "200gb" # Uncomment to set the size for the volume created on first deployment
