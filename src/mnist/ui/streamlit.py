@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -13,7 +14,11 @@ from mnist.model.inference import inference_from_image
 from mnist.ui.database import save_history
 
 # Load the saved state dictionary (make sure 'model_weights.pth' is in your working directory)
-model.load_state_dict(torch.load('model_weights.pth'))
+# hack here for if we are inside our docker container
+# also we will add different devices, mps for macs, cpu and potentially cuda
+inside_docker = os.environ.get('INSIDE_DOCKER', 0) == 1
+model_weights_path = f"/app/model_weights.{device}.pth" if inside_docker else f'model_weights.{device}.pth'
+model.load_state_dict(torch.load(model_weights_path))
 
 # Set the model to evaluation mode
 model.eval()

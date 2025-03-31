@@ -7,12 +7,6 @@ import pandas as pd
 
 from mnist.model.cnn_model import model, device
 
-# Load the saved state dictionary (make sure 'model_weights.pth' is in your working directory)
-model.load_state_dict(torch.load('model_weights.pth'))
-
-# Set the model to evaluation mode
-model.eval()
-
 def inference_from_image(image_data: any, invert: bool = False, full_output: bool = False):
   # # Do something interesting with the image data and paths
   if image_data is not None:

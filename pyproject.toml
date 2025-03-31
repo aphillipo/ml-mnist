@@ -13,13 +13,18 @@ dependencies = [
     "streamlit (>=1.43.2,<2.0.0)",
     "streamlit-drawable-canvas (>=0.9.3,<0.10.0)",
     "pandas (>=2.2.3,<3.0.0)",
-    "watchdog (>=6.0.0,<7.0.0)"
+    "watchdog (>=6.0.0,<7.0.0)",
 ]
 
-[tool.poetry]
-packages = [{include = "mnist", from = "src"}]
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu" },
+]
+torchvision = [
+  { index = "pytorch-cpu" },
+]
 
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

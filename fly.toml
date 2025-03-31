@@ -1,15 +1,32 @@
-app = "mnist-ml-institute"   # Change this to your app's name
-primary_region = "lhr"  # If you change this, ensure it's to a region that offers GPUs
-vm.size = "shared-cpu-1x" # could be a GPU instance but these are not in LHR
-swap_size_mb = 32768    # This enables 32GB swap
+# fly.toml app configuration file generated for mnist-ml-institute-falling-snowflake-9436 on 2025-03-30T21:38:03+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'mnist-ml-institute'
+primary_region = 'lhr'
 
 [build]
-  [build.args]
-    NONROOT_USER = "pythonuser" # Access this value in the Dockerfile using `ARG NONROOT_USER`
 
-# Use a volume to store LLMs or any big file that doesn't fit in a Docker image
-# This whole volume will be the non-root user's home directory
-[mounts]
-source = "data"
-destination = "/home/pythonuser" # Make sure this matches the value of the NONROOT_USER build arg
-# initial_size = "200gb" # Uncomment to set the size for the volume created on first deployment
+[[mounts]]
+  source = 'data'
+  destination = '/home/pythonuser'
+  initial_size = '200gb'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/_stcore/health"
+
+[[vm]]
+  size = 'shared-cpu-1x'

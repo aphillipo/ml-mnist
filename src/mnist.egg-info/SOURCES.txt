@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/mnist/__init__.py
+src/mnist.egg-info/PKG-INFO
+src/mnist.egg-info/SOURCES.txt
+src/mnist.egg-info/dependency_links.txt
+src/mnist.egg-info/requires.txt
+src/mnist.egg-info/top_level.txt
+src/mnist/model/__init__.py
+src/mnist/model/cnn_model.py
+src/mnist/model/inference.py
+src/mnist/model/simple_model.py
+src/mnist/model/train.py
+src/mnist/ui/__init__.py
+src/mnist/ui/database.py
+src/mnist/ui/streamlit.py

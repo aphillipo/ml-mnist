@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mnist
+Version: 0.1.0
+Author-email: Andrew Phillipo <andrewphillipo@gmail.com>
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: torch<3.0.0,>=2.6.0
+Requires-Dist: torchvision<0.22.0,>=0.21.0
+Requires-Dist: streamlit<2.0.0,>=1.43.2
+Requires-Dist: streamlit-drawable-canvas<0.10.0,>=0.9.3
+Requires-Dist: pandas<3.0.0,>=2.2.3
+Requires-Dist: watchdog<7.0.0,>=6.0.0
+
+# ml-mnist

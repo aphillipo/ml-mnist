@@ -53,4 +53,4 @@ for epoch in range(num_epochs):
             correct += (predicted == target).sum().item()
     print(f"Epoch [{epoch+1}/{num_epochs}] Test Accuracy: {100 * correct/total:.2f}%")
 
-torch.save(model.state_dict(), 'model_weights.pth')
+torch.save(model.state_dict(), f'model_weights.{device}.pth')
