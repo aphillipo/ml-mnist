@@ -30,3 +30,4 @@ primary_region = 'lhr'
 
 [[vm]]
   size = 'shared-cpu-1x'
+  memory = '1GB'
