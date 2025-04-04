@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  mnist:
+    build:
+      context: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRES_USER=mnist
+      - POSTGRES_DB=mnist
+      - POSTGRES_PASSWORD=mnist-password
+      - POSTGRES_HOST=postgresql
+
+  postgresql:
+    hostname: postgresql
+    image: postgres:latest
+    restart: always
+    volumes:
+      - ./docker/postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=mnist
+      - POSTGRES_DB=mnist
+      - POSTGRES_PASSWORD=mnist-password

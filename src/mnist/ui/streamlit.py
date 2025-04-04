@@ -11,7 +11,12 @@ from streamlit_drawable_canvas import st_canvas
 from mnist.model.cnn_model import model, device
 from mnist.model.inference import inference_from_image
 
-from mnist.ui.database import save_history
+from mnist.ui.database import get_history, init_table, save_history
+
+table_uninitialised = True
+if table_uninitialised: 
+  init_table()
+  table_uninitialised = False
 
 # Load the saved state dictionary (make sure 'model_weights.pth' is in your working directory)
 # hack here for if we are inside our docker container
@@ -29,6 +34,9 @@ if "data" not in st.session_state:
   st.session_state.prediction = 0
   st.session_state.confidence = 0
   st.session_state.true_value = 0
+
+def on_submit():
+  save_history(st.session_state.prediction, st.session_state.true_value)
 
 col1, col2 = st.columns(2)
 
@@ -54,11 +62,22 @@ with col1:
     st.session_state.prediction = prediction
     st.session_state.confidence = confidence
 
-
 with col2:
   st.text(f"Predction: {st.session_state.prediction}")
   st.text(f"Confidence: {st.session_state.confidence * 100:.2f}%")
 
   true_value = st.number_input("True value:", 0, 9, step=1)
+  st.session_state.true_value = true_value
 
-  st.button("Submit", None, None, save_history)
+  if st.button("Submit"):
+    save_history(st.session_state.prediction, st.session_state.true_value)
+    st.session_state.prediction = 0
+    st.session_state.confidence = 0
+    st.session_state.true_value = ''
+
+  
+# Convert data to a DataFrame if there is data
+st.text(f"History")
+data = get_history()
+df = pd.DataFrame(data, columns=["date", "prediction", "true_value"])
+st.dataframe(df)
