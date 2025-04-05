@@ -21,6 +21,9 @@ dependencies = [
 torch = [
   { index = "pytorch-cpu" },
 ]
+torchvision = [
+  { index = "pytorch-cpu" },
+]
 
 [tool.uv]
 allow-insecure-host = ["download.pytorch.org"]

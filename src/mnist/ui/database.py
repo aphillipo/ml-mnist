@@ -11,6 +11,7 @@ def connect():
       "host": os.environ.get('POSTGRES_HOST'), 
       "port": "5432"
   }
+  print(conn_params)
 
   # Establish the connection
   conn = psycopg2.connect(**conn_params)
