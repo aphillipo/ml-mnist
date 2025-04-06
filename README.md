@@ -1,13 +1,33 @@
 # ml-mnist
 
+## Install the packages
+
+Make sure you have `uv` installed globally:
+
+```bash
+pip3 install uv
+```
+
+Then you can install the required packages:
+
+```bash
+uv sync
+```
+
 ## Run the training
 
+```bash
 PYTHONPATH=./src uv run python ./src/mnist/model/train.py
+```
+
+Note there is already a CPU training available
 
 ## Run the project locally
 
+```bash
 uv sync
 uv run streamlit run /app/src/mnist/ui/streamlit.py --server.port=8080 --server.address=0.0.0.0
+```
 
 ## Run the project with Docker
 
