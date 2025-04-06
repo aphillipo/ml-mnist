@@ -17,8 +17,4 @@ COPY .streamlit model_weights.cpu.pth ./
 
 EXPOSE 8080
 
-HEALTHCHECK CMD curl --fail http://0.0.0.0:8080/_stcore/health
-
 CMD ["uv", "run", "streamlit", "run", "/app/src/mnist/ui/streamlit.py", "--server.port=8080", "--server.address=0.0.0.0"]
-
-# uv run streamlit run /app/src/mnist/ui/streamlit.py --server.port=8080 --server.address=0.0.0.0

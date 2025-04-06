@@ -11,8 +11,6 @@ def connect():
       "host": os.environ.get('POSTGRES_HOST'), 
       "port": "5432"
   }
-  print(conn_params)
-
   # Establish the connection
   conn = psycopg2.connect(**conn_params)
   return conn
@@ -66,17 +64,16 @@ def init_table():
 
 # TODO paginate?
 def get_history():
+  conn = connect()
+  cur = conn.cursor()
   try:
-    conn = connect()
     select_query = "SELECT date, prediction, true_value FROM mnist_history ORDER BY date DESC;"
-    cur = conn.cursor()
     cur.execute(select_query)
     rows = cur.fetchall()
     return rows
   except Exception as error:
     print("Error while interacting with PostgreSQL", error)      
   finally:
-    # Close the cursor and connection to free resources
     if cur:
       cur.close()
     if conn:
